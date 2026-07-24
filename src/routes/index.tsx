@@ -1,24 +1,299 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Sparkles, Zap, FileText, Video, Target, Check, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "كوبي — محتوى تسويقي احترافي بالذكاء الاصطناعي" },
+      {
+        name: "description",
+        content:
+          "أنشئ وصف منتج، سكربت فيديو، وأفكار إعلانات جاهزة للنشر في ثوانٍ. مصمّم خصيصاً لأصحاب المتاجر الإلكترونية العرب.",
+      },
+      { property: "og:title", content: "كوبي — محتوى تسويقي بالذكاء الاصطناعي" },
+      { property: "og:description", content: "محتوى منتج عالي التحويل في ثوانٍ." },
+    ],
+  }),
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Landing() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <Steps />
+      <Examples />
+      <Testimonials />
+      <PricingPreview />
+      <FinalCta />
+      <Footer />
     </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+        <Link to="/" className="flex items-center gap-2 font-black text-lg">
+          <span className="grid h-8 w-8 place-items-center rounded-lg gradient-primary text-primary-foreground shadow-soft">
+            <Sparkles className="h-4 w-4" />
+          </span>
+          كوبي
+        </Link>
+        <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+          <Link to="/pricing" className="hover:text-foreground transition">الأسعار</Link>
+          <a href="#how" className="hover:text-foreground transition">كيف يعمل</a>
+          <a href="#examples" className="hover:text-foreground transition">أمثلة</a>
+        </nav>
+        <div className="flex items-center gap-2">
+          <Link to="/auth/login" className="text-sm text-muted-foreground hover:text-foreground px-3 py-2">
+            دخول
+          </Link>
+          <Link
+            to="/auth/signup"
+            className="inline-flex items-center gap-1 rounded-lg gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-soft hover:opacity-90 transition"
+          >
+            ابدأ مجاناً
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="relative overflow-hidden gradient-hero">
+      <div className="mx-auto max-w-4xl px-4 py-20 text-center md:py-28">
+        <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs text-muted-foreground shadow-soft">
+          <Sparkles className="h-3.5 w-3.5 text-primary" />
+          مدعوم بالذكاء الاصطناعي — مصمّم للمتاجر العربية
+        </div>
+        <h1 className="text-balance text-4xl font-black leading-tight md:text-6xl">
+          محتوى تسويقي عالي التحويل
+          <br />
+          <span className="bg-gradient-to-l from-primary to-primary-glow bg-clip-text text-transparent">
+            لمنتجاتك في ثوانٍ
+          </span>
+        </h1>
+        <p className="mx-auto mt-5 max-w-2xl text-pretty text-base text-muted-foreground md:text-lg">
+          الصق رابط منتجك واحصل فوراً على وصف SEO، سكربت فيديو تيك توك، وأفكار إعلانية جاهزة للنشر.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link
+            to="/auth/signup"
+            className="group inline-flex items-center gap-2 rounded-xl gradient-primary px-6 py-3.5 text-base font-bold text-primary-foreground shadow-glow hover:opacity-95 transition"
+          >
+            ابدأ مجاناً — 5 محاولات
+            <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-1" />
+          </Link>
+          <Link
+            to="/pricing"
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3.5 text-base font-semibold hover:bg-accent transition"
+          >
+            عرض الأسعار
+          </Link>
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">بدون بطاقة ائتمان · إلغاء في أي وقت</p>
+      </div>
+    </section>
+  );
+}
+
+function Steps() {
+  const steps = [
+    { icon: FileText, title: "الصق الرابط", desc: "أدخل رابط المنتج أو اكتب وصفاً بسيطاً بكلمات قليلة." },
+    { icon: Sparkles, title: "الذكاء يشتغل", desc: "يحلّل الذكاء الاصطناعي منتجك ويصمّم محتوى مقنعاً." },
+    { icon: Zap, title: "انسخ وانشر", desc: "احصل على 3 محتويات جاهزة للنشر مباشرة على متجرك." },
+  ];
+  return (
+    <section id="how" className="mx-auto max-w-6xl px-4 py-20">
+      <div className="mb-12 text-center">
+        <h2 className="text-3xl font-black md:text-4xl">3 خطوات فقط</h2>
+        <p className="mt-2 text-muted-foreground">من الفكرة إلى محتوى جاهز خلال أقل من دقيقة</p>
+      </div>
+      <div className="grid gap-6 md:grid-cols-3">
+        {steps.map((s, i) => (
+          <div
+            key={s.title}
+            className="group relative rounded-2xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-glow"
+          >
+            <div className="absolute -top-3 left-6 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+              خطوة {i + 1}
+            </div>
+            <div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-accent text-accent-foreground">
+              <s.icon className="h-6 w-6" />
+            </div>
+            <h3 className="mb-2 text-lg font-bold">{s.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Examples() {
+  const cards = [
+    {
+      icon: FileText,
+      title: "وصف منتج SEO",
+      body: "اكتشف التصميم الذي يجمع بين الأناقة والوظيفة — قطعة استثنائية تلفت الأنظار وتمنحك ثقة عالية في كل مناسبة…",
+    },
+    {
+      icon: Video,
+      title: "سكربت فيديو",
+      body: "[0-3ث] وقّف! لو تبحث عن الأفضل، لا تفوت هذا الفيديو — [3-8ث] المشكلة… [8-14ث] الحل…",
+    },
+    {
+      icon: Target,
+      title: "أفكار إعلانية",
+      body: "1) قبل/بعد على TikTok · 2) شهادة عميل على Instagram · 3) عرض محدود بعدّاد تنازلي…",
+    },
+  ];
+  return (
+    <section id="examples" className="border-y border-border bg-secondary/40 py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-black md:text-4xl">أمثلة على المحتوى المُنتَج</h2>
+          <p className="mt-2 text-muted-foreground">هذا فقط جزء بسيط مما يمكنك الحصول عليه</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {cards.map((c) => (
+            <div key={c.title} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <c.icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-bold">{c.title}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const items = [
+    { name: "سارة العتيبي", role: "متجر أزياء", quote: "وفّرت عليّ ساعات كل يوم. محتوى احترافي بدون تعب." },
+    { name: "خالد الحربي", role: "دروبشيبينج", quote: "زادت مبيعاتي بعدما بديت أستخدم السكربتات في تيك توك." },
+    { name: "منى القحطاني", role: "متجر إنستقرام", quote: "أفضل أداة جربتها — بسيطة وسريعة والنتايج ممتازة." },
+  ];
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-20">
+      <div className="mb-12 text-center">
+        <h2 className="text-3xl font-black md:text-4xl">ماذا يقول عملاؤنا</h2>
+      </div>
+      <div className="grid gap-6 md:grid-cols-3">
+        {items.map((t) => (
+          <figure key={t.name} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <blockquote className="text-sm leading-relaxed">"{t.quote}"</blockquote>
+            <figcaption className="mt-4 flex items-center gap-3">
+              <div className="grid h-10 w-10 place-items-center rounded-full gradient-primary font-bold text-primary-foreground">
+                {t.name.charAt(0)}
+              </div>
+              <div>
+                <div className="text-sm font-bold">{t.name}</div>
+                <div className="text-xs text-muted-foreground">{t.role}</div>
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PricingPreview() {
+  const plans = [
+    { name: "مجاني", price: "0", features: ["5 محتويات مجاناً", "3 أنواع محتوى", "دعم أساسي"], cta: "ابدأ الآن", href: "/auth/signup" as const },
+    { name: "احترافي", price: "49", highlight: true, features: ["200 محتوى شهرياً", "أولوية في التوليد", "دعم مميز", "تصدير للنص"], cta: "الترقية", href: "/pricing" as const },
+  ];
+  return (
+    <section className="border-y border-border bg-secondary/40 py-20">
+      <div className="mx-auto max-w-4xl px-4">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-black md:text-4xl">أسعار بسيطة وواضحة</h2>
+          <p className="mt-2 text-muted-foreground">ابدأ مجاناً وارتقِ حسب احتياجك</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {plans.map((p) => (
+            <div
+              key={p.name}
+              className={
+                "relative rounded-2xl border p-8 shadow-soft " +
+                (p.highlight ? "border-primary/40 bg-card shadow-glow" : "border-border bg-card")
+              }
+            >
+              {p.highlight && (
+                <div className="absolute -top-3 right-6 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+                  الأكثر شعبية
+                </div>
+              )}
+              <div className="text-lg font-bold">{p.name}</div>
+              <div className="mt-2 flex items-baseline gap-1">
+                <span className="text-4xl font-black">{p.price}</span>
+                <span className="text-sm text-muted-foreground">ريال / شهر</span>
+              </div>
+              <ul className="mt-6 space-y-2 text-sm">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-primary" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to={p.href}
+                className={
+                  "mt-6 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-bold transition " +
+                  (p.highlight
+                    ? "gradient-primary text-primary-foreground hover:opacity-95"
+                    : "border border-border bg-background hover:bg-accent")
+                }
+              >
+                {p.cta}
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCta() {
+  return (
+    <section className="mx-auto max-w-4xl px-4 py-24 text-center">
+      <h2 className="text-3xl font-black md:text-5xl">
+        جاهز لتوفير ساعات من الكتابة؟
+      </h2>
+      <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+        انضم لآلاف أصحاب المتاجر الذين يستخدمون كوبي يومياً لإنشاء محتوى يبيع.
+      </p>
+      <Link
+        to="/auth/signup"
+        className="mt-8 inline-flex items-center gap-2 rounded-xl gradient-primary px-8 py-4 text-lg font-bold text-primary-foreground shadow-glow hover:opacity-95 transition"
+      >
+        ابدأ مجاناً الآن
+        <ArrowLeft className="h-5 w-5" />
+      </Link>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-border py-8">
+      <div className="mx-auto max-w-6xl px-4 text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} كوبي — جميع الحقوق محفوظة.
+      </div>
+    </footer>
   );
 }
