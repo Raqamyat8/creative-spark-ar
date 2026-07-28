@@ -41,6 +41,45 @@ export const Route = createFileRoute("/")({
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/" }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                name: "كوبي",
+                url: "https://creative-spark-ar.lovable.app/",
+                email: "remlemehmoud@gmail.com",
+              },
+              {
+                "@type": "WebSite",
+                name: "كوبي",
+                url: "https://creative-spark-ar.lovable.app/",
+                inLanguage: "ar",
+              },
+              {
+                "@type": "SoftwareApplication",
+                name: "كوبي",
+                applicationCategory: "BusinessApplication",
+                operatingSystem: "Web",
+                inLanguage: "ar",
+                description,
+                offers: { "@type": "Offer", price: "0", priceCurrency: "SAR" },
+              },
+              {
+                "@type": "FAQPage",
+                mainEntity: FAQS.map((f) => ({
+                  "@type": "Question",
+                  name: f.q,
+                  acceptedAnswer: { "@type": "Answer", text: f.a },
+                })),
+              },
+            ],
+          }),
+        },
+      ],
     };
   },
 
@@ -55,11 +94,33 @@ function Landing() {
       <Hero />
       <Steps />
       <Examples />
-      <Testimonials />
+      <Faq />
       <FinalCta />
       <AdSlot id="ad-bottom-banner" label="مساحة إعلانية — Bottom Banner" className="pb-8" />
-      <Footer />
+      <SiteFooter />
     </div>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="mx-auto max-w-3xl px-4 py-20">
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl font-black md:text-4xl">الأسئلة الشائعة</h2>
+      </div>
+      <Accordion type="single" collapsible className="w-full">
+        {FAQS.map((f, i) => (
+          <AccordionItem key={f.q} value={`item-${i}`} className="border-border">
+            <AccordionTrigger className="text-right text-base font-bold">
+              {f.q}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+              {f.a}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </section>
   );
 }
 
