@@ -3,18 +3,25 @@ import { Sparkles, Zap, FileText, Video, Target, ArrowLeft } from "lucide-react"
 import { AdSlot } from "@/components/ad-slot";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "كوبي — محتوى تسويقي احترافي بالذكاء الاصطناعي" },
-      {
-        name: "description",
-        content:
-          "أنشئ وصف منتج، سكربت فيديو، وأفكار إعلانات جاهزة للنشر في ثوانٍ. مصمّم خصيصاً لأصحاب المتاجر الإلكترونية العرب.",
-      },
-      { property: "og:title", content: "كوبي — محتوى تسويقي بالذكاء الاصطناعي" },
-      { property: "og:description", content: "محتوى منتج عالي التحويل في ثوانٍ." },
-    ],
-  }),
+  head: () => {
+    const title =
+      "كوبي | كاتب أوصاف المنتجات وسكربتات تيك توك بالذكاء الاصطناعي مجاناً";
+    const description =
+      "أداة كوبي المجانية لكتابة وصف منتجات المتاجر الإلكترونية المتوافق مع السيو، وصناعة سكربتات إعلانات تيك توك وإنستقرام بالذكاء الاصطناعي في ثوانٍ بدون اشتراك.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://creative-spark-ar.lovable.app/" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/" }],
+    };
+  },
+
   component: Landing,
 });
 
