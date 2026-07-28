@@ -277,7 +277,7 @@ function FinalCta() {
         جاهز لتوفير ساعات من الكتابة؟
       </h2>
       <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-        انضم لآلاف أصحاب المتاجر الذين يستخدمون كوبي يومياً لإنشاء محتوى يبيع.
+        ابدأ الآن مجاناً وأنشئ محتوى منتجاتك في ثوانٍ.
       </p>
       <Link
         to="/auth/signup"
