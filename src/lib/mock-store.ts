@@ -5,8 +5,6 @@ export type User = {
   id: string;
   email: string;
   name: string;
-  plan: "free" | "pro";
-  credits: number;
   createdAt: string;
 };
 
@@ -54,8 +52,6 @@ export function signup(email: string, password: string, name: string): User {
     id: crypto.randomUUID(),
     email,
     name,
-    plan: "free",
-    credits: 5,
     createdAt: new Date().toISOString(),
   };
   users.push({ ...user, password });

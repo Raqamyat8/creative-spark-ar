@@ -33,10 +33,6 @@ function DashboardHome() {
       toast.error("الرجاء إدخال رابط أو وصف للمنتج");
       return;
     }
-    if (user.credits <= 0) {
-      toast.error("رصيدك انتهى. قم بترقية خطتك للاستمرار.");
-      return;
-    }
     setLoading(true);
     try {
       const output = await generateContent(input);
@@ -51,7 +47,6 @@ function DashboardHome() {
         createdAt: new Date().toISOString(),
       };
       saveGeneration(gen);
-      updateUser({ credits: user.credits - 1 });
       toast.success("تم إنشاء المحتوى بنجاح ✨");
       navigate({ to: "/dashboard/results/$id", params: { id: gen.id } });
     } catch {
@@ -103,7 +98,7 @@ function DashboardHome() {
             )}
           </button>
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            كل عملية توليد تستهلك رصيد واحد · لديك {user.credits} متبقٍ
+            مجاني بالكامل · عدد غير محدود من عمليات التوليد
           </p>
         </div>
 

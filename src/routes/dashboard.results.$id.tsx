@@ -49,13 +49,8 @@ function ResultsPage() {
 
   const regenerateAll = async () => {
     if (!user) return;
-    if (user.credits <= 0) {
-      toast.error("رصيدك انتهى");
-      return;
-    }
     toast.loading("جاري إعادة الإنشاء...", { id: "regen" });
     const out = await generateContent(gen.input);
-    updateUser({ credits: user.credits - 1 });
     update({ ...out });
     toast.success("تم التحديث ✨", { id: "regen" });
   };
