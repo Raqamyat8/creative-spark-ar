@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { FileText, Video, Target, Copy, RefreshCw, Check, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/use-auth";
-import { getGeneration, saveGeneration, updateUser, type Generation } from "@/lib/mock-store";
+import { getGeneration, saveGeneration, type Generation } from "@/lib/mock-store";
 import { generateContent } from "@/lib/generate";
 
 export const Route = createFileRoute("/dashboard/results/$id")({
@@ -49,13 +49,8 @@ function ResultsPage() {
 
   const regenerateAll = async () => {
     if (!user) return;
-    if (user.credits <= 0) {
-      toast.error("رصيدك انتهى");
-      return;
-    }
     toast.loading("جاري إعادة الإنشاء...", { id: "regen" });
     const out = await generateContent(gen.input);
-    updateUser({ credits: user.credits - 1 });
     update({ ...out });
     toast.success("تم التحديث ✨", { id: "regen" });
   };

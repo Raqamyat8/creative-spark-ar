@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { LayoutDashboard, History, User as UserIcon, LogOut, Sparkles, CreditCard, Menu } from "lucide-react";
+import { LayoutDashboard, History, User as UserIcon, LogOut, Sparkles, Menu } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/lib/use-auth";
 import { logout } from "@/lib/mock-store";
@@ -75,19 +75,9 @@ function DashboardLayout() {
             })}
           </nav>
           <div className="absolute inset-x-3 bottom-3">
-            <div className="rounded-xl border border-sidebar-border bg-card p-4">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <CreditCard className="h-3.5 w-3.5" />
-                رصيدك
-              </div>
-              <div className="mt-1 text-2xl font-black text-primary">{user.credits}</div>
-              <div className="text-xs text-muted-foreground">محتوى متبقي</div>
-              <Link
-                to="/pricing"
-                className="mt-3 inline-flex w-full items-center justify-center rounded-lg gradient-primary px-3 py-2 text-xs font-bold text-primary-foreground hover:opacity-95 transition"
-              >
-                ترقية
-              </Link>
+            <div className="rounded-xl border border-sidebar-border bg-card p-4 text-center">
+              <div className="text-sm font-bold text-primary">مجاني وغير محدود</div>
+              <div className="mt-1 text-xs text-muted-foreground">أنشئ محتوى بلا قيود</div>
             </div>
           </div>
         </aside>
@@ -115,7 +105,7 @@ function DashboardLayout() {
             <div className="flex items-center gap-3">
               <div className="hidden sm:flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium">
                 <span className="h-2 w-2 rounded-full bg-primary" />
-                رصيد: {user.credits}
+                مجاني وغير محدود
               </div>
               <div className="grid h-9 w-9 place-items-center rounded-full gradient-primary text-sm font-bold text-primary-foreground">
                 {user.name.charAt(0).toUpperCase()}

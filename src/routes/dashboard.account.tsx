@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { CreditCard, Mail, User as UserIcon, Zap } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Mail, User as UserIcon, Zap } from "lucide-react";
 import { useAuth } from "@/lib/use-auth";
 
 export const Route = createFileRoute("/dashboard/account")({
@@ -11,9 +11,6 @@ function AccountPage() {
   const { user } = useAuth();
   if (!user) return null;
 
-  const limit = user.plan === "pro" ? 200 : 5;
-  const used = Math.max(0, limit - user.credits);
-  const pct = Math.min(100, (used / limit) * 100);
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -47,35 +44,16 @@ function AccountPage() {
               <div className="text-xs uppercase tracking-wide text-muted-foreground">
                 الخطة الحالية
               </div>
-              <div className="mt-1 text-xl font-black">
-                {user.plan === "pro" ? "احترافي" : "مجاني"}
-              </div>
+              <div className="mt-1 text-xl font-black">مجاني وغير محدود</div>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground">
               <Zap className="h-3.5 w-3.5 text-primary" />
-              {user.credits} رصيد متبقٍ
+              استخدام بلا حدود
             </div>
           </div>
-
-          <div className="mt-5">
-            <div className="mb-1.5 flex items-center justify-between text-xs text-muted-foreground">
-              <span>الاستخدام</span>
-              <span>{used} / {limit}</span>
-            </div>
-            <div className="h-2 overflow-hidden rounded-full bg-muted">
-              <div className="h-full gradient-primary transition-all" style={{ width: `${pct}%` }} />
-            </div>
-          </div>
-
-          {user.plan === "free" && (
-            <Link
-              to="/pricing"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl gradient-primary px-5 py-3 text-sm font-bold text-primary-foreground shadow-soft hover:opacity-95 transition"
-            >
-              <CreditCard className="h-4 w-4" />
-              الترقية إلى احترافي
-            </Link>
-          )}
+          <p className="mt-4 text-sm text-muted-foreground">
+            كل ميزات كوبي متاحة لك مجاناً بالكامل — بدون اشتراكات ولا حدود على عدد المحتويات.
+          </p>
         </section>
       </div>
     </div>
