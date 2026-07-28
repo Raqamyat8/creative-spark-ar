@@ -269,36 +269,6 @@ function Examples() {
   );
 }
 
-function Testimonials() {
-  const items = [
-    { name: "سارة العتيبي", role: "متجر أزياء", quote: "وفّرت عليّ ساعات كل يوم. محتوى احترافي بدون تعب." },
-    { name: "خالد الحربي", role: "دروبشيبينج", quote: "زادت مبيعاتي بعدما بديت أستخدم السكربتات في تيك توك." },
-    { name: "منى القحطاني", role: "متجر إنستقرام", quote: "أفضل أداة جربتها — بسيطة وسريعة والنتايج ممتازة." },
-  ];
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-20">
-      <div className="mb-12 text-center">
-        <h2 className="text-3xl font-black md:text-4xl">ماذا يقول عملاؤنا</h2>
-      </div>
-      <div className="grid gap-6 md:grid-cols-3">
-        {items.map((t) => (
-          <figure key={t.name} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
-            <blockquote className="text-sm leading-relaxed">"{t.quote}"</blockquote>
-            <figcaption className="mt-4 flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-full gradient-primary font-bold text-primary-foreground">
-                {t.name.charAt(0)}
-              </div>
-              <div>
-                <div className="text-sm font-bold">{t.name}</div>
-                <div className="text-xs text-muted-foreground">{t.role}</div>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function FinalCta() {
   return (
@@ -320,12 +290,3 @@ function FinalCta() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-border py-8">
-      <div className="mx-auto max-w-6xl px-4 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} كوبي — جميع الحقوق محفوظة.
-      </div>
-    </footer>
-  );
-}
