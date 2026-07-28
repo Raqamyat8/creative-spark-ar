@@ -1,6 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, Zap, FileText, Video, Target, ArrowLeft } from "lucide-react";
 import { AdSlot } from "@/components/ad-slot";
+import { SiteFooter } from "@/components/site-footer";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const FAQS = [
+  {
+    q: "هل أداة كوبي مجانية بالكامل؟",
+    a: "نعم، أداة كوبي مجانية حاليًا، ومفتوحة لأصحاب المتاجر الإلكترونية العربية لإنشاء أوصاف المنتجات والمحتوى التسويقي باستخدام الذكاء الاصطناعي، وفقًا للميزات المتاحة في الموقع.",
+  },
+  {
+    q: "هل تساعد كوبي في كتابة أوصاف منتجات محسّنة لمحركات البحث (SEO)؟",
+    a: "نعم، تم تصميم كوبي لمساعدتك في إنشاء أوصاف منتجات احترافية ومنظمة تساعدك على تحسين جودة محتوى صفحات المنتجات وتهيئتها لمحركات البحث. ومع ذلك، لا تضمن كوبي تصدر نتائج Google، لأن ترتيب نتائج البحث يعتمد على عوامل متعددة مثل جودة الموقع والمحتوى والمنافسة وتجربة المستخدم.",
+  },
+  {
+    q: "هل يمكنني استخدام المحتوى الذي أنشئه كوبي في متجري وحساباتي التسويقية؟",
+    a: "نعم، يمكنك نسخ المحتوى الذي تنشئه كوبي واستخدامه في متجرك الإلكتروني وحملاتك التسويقية وحساباتك على منصات التواصل الاجتماعي، مثل سلة وزد وشوبيفاي وتيك توك وإنستقرام، مع مراجعة المحتوى وتعديله بما يناسب منتجك وجمهورك قبل نشره.",
+  },
+];
 
 export const Route = createFileRoute("/")({
   head: () => {
@@ -19,6 +41,45 @@ export const Route = createFileRoute("/")({
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/" }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                name: "كوبي",
+                url: "https://creative-spark-ar.lovable.app/",
+                email: "remlemehmoud@gmail.com",
+              },
+              {
+                "@type": "WebSite",
+                name: "كوبي",
+                url: "https://creative-spark-ar.lovable.app/",
+                inLanguage: "ar",
+              },
+              {
+                "@type": "SoftwareApplication",
+                name: "كوبي",
+                applicationCategory: "BusinessApplication",
+                operatingSystem: "Web",
+                inLanguage: "ar",
+                description,
+                offers: { "@type": "Offer", price: "0", priceCurrency: "SAR" },
+              },
+              {
+                "@type": "FAQPage",
+                mainEntity: FAQS.map((f) => ({
+                  "@type": "Question",
+                  name: f.q,
+                  acceptedAnswer: { "@type": "Answer", text: f.a },
+                })),
+              },
+            ],
+          }),
+        },
+      ],
     };
   },
 
@@ -33,11 +94,33 @@ function Landing() {
       <Hero />
       <Steps />
       <Examples />
-      <Testimonials />
+      <Faq />
       <FinalCta />
       <AdSlot id="ad-bottom-banner" label="مساحة إعلانية — Bottom Banner" className="pb-8" />
-      <Footer />
+      <SiteFooter />
     </div>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="mx-auto max-w-3xl px-4 py-20">
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl font-black md:text-4xl">الأسئلة الشائعة</h2>
+      </div>
+      <Accordion type="single" collapsible className="w-full">
+        {FAQS.map((f, i) => (
+          <AccordionItem key={f.q} value={`item-${i}`} className="border-border">
+            <AccordionTrigger className="text-right text-base font-bold">
+              {f.q}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+              {f.a}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </section>
   );
 }
 
@@ -186,36 +269,6 @@ function Examples() {
   );
 }
 
-function Testimonials() {
-  const items = [
-    { name: "سارة العتيبي", role: "متجر أزياء", quote: "وفّرت عليّ ساعات كل يوم. محتوى احترافي بدون تعب." },
-    { name: "خالد الحربي", role: "دروبشيبينج", quote: "زادت مبيعاتي بعدما بديت أستخدم السكربتات في تيك توك." },
-    { name: "منى القحطاني", role: "متجر إنستقرام", quote: "أفضل أداة جربتها — بسيطة وسريعة والنتايج ممتازة." },
-  ];
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-20">
-      <div className="mb-12 text-center">
-        <h2 className="text-3xl font-black md:text-4xl">ماذا يقول عملاؤنا</h2>
-      </div>
-      <div className="grid gap-6 md:grid-cols-3">
-        {items.map((t) => (
-          <figure key={t.name} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
-            <blockquote className="text-sm leading-relaxed">"{t.quote}"</blockquote>
-            <figcaption className="mt-4 flex items-center gap-3">
-              <div className="grid h-10 w-10 place-items-center rounded-full gradient-primary font-bold text-primary-foreground">
-                {t.name.charAt(0)}
-              </div>
-              <div>
-                <div className="text-sm font-bold">{t.name}</div>
-                <div className="text-xs text-muted-foreground">{t.role}</div>
-              </div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function FinalCta() {
   return (
@@ -224,7 +277,7 @@ function FinalCta() {
         جاهز لتوفير ساعات من الكتابة؟
       </h2>
       <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-        انضم لآلاف أصحاب المتاجر الذين يستخدمون كوبي يومياً لإنشاء محتوى يبيع.
+        ابدأ الآن مجاناً وأنشئ محتوى منتجاتك في ثوانٍ.
       </p>
       <Link
         to="/auth/signup"
@@ -237,12 +290,3 @@ function FinalCta() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-border py-8">
-      <div className="mx-auto max-w-6xl px-4 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} كوبي — جميع الحقوق محفوظة.
-      </div>
-    </footer>
-  );
-}
