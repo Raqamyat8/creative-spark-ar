@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Sparkles, Zap, FileText, Video, Target, Check, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Sparkles, Zap, FileText, Video, Target, ArrowLeft } from "lucide-react";
+import { AdSlot } from "@/components/ad-slot";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,12 +22,13 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <AdSlot id="ad-top-banner" label="مساحة إعلانية — Top Banner" className="py-4" />
       <Hero />
       <Steps />
       <Examples />
       <Testimonials />
-      <PricingPreview />
       <FinalCta />
+      <AdSlot id="ad-bottom-banner" label="مساحة إعلانية — Bottom Banner" className="pb-8" />
       <Footer />
     </div>
   );
@@ -44,7 +45,6 @@ function Header() {
           كوبي
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-          <Link to="/pricing" className="hover:text-foreground transition">الأسعار</Link>
           <a href="#how" className="hover:text-foreground transition">كيف يعمل</a>
           <a href="#examples" className="hover:text-foreground transition">أمثلة</a>
         </nav>
@@ -70,7 +70,7 @@ function Hero() {
       <div className="mx-auto max-w-4xl px-4 py-20 text-center md:py-28">
         <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs text-muted-foreground shadow-soft">
           <Sparkles className="h-3.5 w-3.5 text-primary" />
-          مدعوم بالذكاء الاصطناعي — مصمّم للمتاجر العربية
+          مجاني بالكامل · مدعوم بالذكاء الاصطناعي للمتاجر العربية
         </div>
         <h1 className="text-balance text-4xl font-black leading-tight md:text-6xl">
           محتوى تسويقي عالي التحويل
@@ -87,17 +87,17 @@ function Hero() {
             to="/auth/signup"
             className="group inline-flex items-center gap-2 rounded-xl gradient-primary px-6 py-3.5 text-base font-bold text-primary-foreground shadow-glow hover:opacity-95 transition"
           >
-            ابدأ مجاناً — 5 محاولات
+            ابدأ مجاناً — بلا حدود
             <ArrowLeft className="h-4 w-4 transition group-hover:-translate-x-1" />
           </Link>
-          <Link
-            to="/pricing"
+          <a
+            href="#how"
             className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3.5 text-base font-semibold hover:bg-accent transition"
           >
-            عرض الأسعار
-          </Link>
+            كيف يعمل
+          </a>
         </div>
-        <p className="mt-4 text-xs text-muted-foreground">بدون بطاقة ائتمان · إلغاء في أي وقت</p>
+        <p className="mt-4 text-xs text-muted-foreground">مجاني 100% · بدون بطاقة ائتمان · استخدام غير محدود</p>
       </div>
     </section>
   );
@@ -205,64 +205,6 @@ function Testimonials() {
             </figcaption>
           </figure>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function PricingPreview() {
-  const plans = [
-    { name: "مجاني", price: "0", features: ["5 محتويات مجاناً", "3 أنواع محتوى", "دعم أساسي"], cta: "ابدأ الآن", href: "/auth/signup" as const },
-    { name: "احترافي", price: "49", highlight: true, features: ["200 محتوى شهرياً", "أولوية في التوليد", "دعم مميز", "تصدير للنص"], cta: "الترقية", href: "/pricing" as const },
-  ];
-  return (
-    <section className="border-y border-border bg-secondary/40 py-20">
-      <div className="mx-auto max-w-4xl px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl font-black md:text-4xl">أسعار بسيطة وواضحة</h2>
-          <p className="mt-2 text-muted-foreground">ابدأ مجاناً وارتقِ حسب احتياجك</p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={
-                "relative rounded-2xl border p-8 shadow-soft " +
-                (p.highlight ? "border-primary/40 bg-card shadow-glow" : "border-border bg-card")
-              }
-            >
-              {p.highlight && (
-                <div className="absolute -top-3 right-6 rounded-full gradient-primary px-3 py-1 text-xs font-bold text-primary-foreground">
-                  الأكثر شعبية
-                </div>
-              )}
-              <div className="text-lg font-bold">{p.name}</div>
-              <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-4xl font-black">{p.price}</span>
-                <span className="text-sm text-muted-foreground">ريال / شهر</span>
-              </div>
-              <ul className="mt-6 space-y-2 text-sm">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-primary" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to={p.href}
-                className={
-                  "mt-6 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-bold transition " +
-                  (p.highlight
-                    ? "gradient-primary text-primary-foreground hover:opacity-95"
-                    : "border border-border bg-background hover:bg-accent")
-                }
-              >
-                {p.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
