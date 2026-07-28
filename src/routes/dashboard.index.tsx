@@ -4,7 +4,7 @@ import { Sparkles, ArrowLeft, Zap, FileText, Video, Target, ChevronLeft } from "
 import { toast } from "sonner";
 import { useAuth } from "@/lib/use-auth";
 import { generateContent } from "@/lib/generate";
-import { listGenerations, saveGeneration, updateUser, type Generation } from "@/lib/mock-store";
+import { listGenerations, saveGeneration, type Generation } from "@/lib/mock-store";
 
 export const Route = createFileRoute("/dashboard/")({
   component: DashboardHome,
