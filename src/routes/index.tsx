@@ -37,10 +37,10 @@ export const Route = createFileRoute("/")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://creative-spark-ar.lovable.app/" },
+        { property: "og:url", content: "https://ai-product-description-mu.vercel.app/" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
-      links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/" }],
+      links: [{ rel: "canonical", href: "https://ai-product-description-mu.vercel.app/" }],
       scripts: [
         {
           type: "application/ld+json",
@@ -50,13 +50,13 @@ export const Route = createFileRoute("/")({
               {
                 "@type": "Organization",
                 name: "كوبي",
-                url: "https://creative-spark-ar.lovable.app/",
+                url: "https://ai-product-description-mu.vercel.app/",
                 email: "remlemehmoud@gmail.com",
               },
               {
                 "@type": "WebSite",
                 name: "كوبي",
-                url: "https://creative-spark-ar.lovable.app/",
+                url: "https://ai-product-description-mu.vercel.app/",
                 inLanguage: "ar",
               },
               {

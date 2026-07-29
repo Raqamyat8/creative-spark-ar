@@ -13,10 +13,10 @@ export const Route = createFileRoute("/privacy")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://creative-spark-ar.lovable.app/privacy" },
+      { property: "og:url", content: "https://ai-product-description-mu.vercel.app/privacy" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/privacy" }],
+    links: [{ rel: "canonical", href: "https://ai-product-description-mu.vercel.app/privacy" }],
   }),
   component: PrivacyPage,
 });

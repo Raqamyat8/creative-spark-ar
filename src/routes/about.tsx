@@ -13,10 +13,10 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://creative-spark-ar.lovable.app/about" },
+      { property: "og:url", content: "https://ai-product-description-mu.vercel.app/about" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/about" }],
+    links: [{ rel: "canonical", href: "https://ai-product-description-mu.vercel.app/about" }],
   }),
   component: AboutPage,
 });
