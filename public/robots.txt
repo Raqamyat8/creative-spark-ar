@@ -4,4 +4,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /auth
 
-Sitemap: https://creative-spark-ar.lovable.app/sitemap.xml
+Sitemap: https://ai-product-description-mu.vercel.app/sitemap.xml
