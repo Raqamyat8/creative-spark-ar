@@ -16,10 +16,10 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://creative-spark-ar.lovable.app/contact" },
+      { property: "og:url", content: "https://ai-product-description-mu.vercel.app/contact" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://creative-spark-ar.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: "https://ai-product-description-mu.vercel.app/contact" }],
   }),
   component: ContactPage,
 });
